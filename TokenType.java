@@ -1,0 +1,12 @@
+public enum TokenType {
+  EOF,
+  COMMENT,
+  IDENTIFIER,
+  GLOBALIDENTIFIER,
+  KEYWORD,
+  NUMBER,
+  STRING,
+  OPERATOR,
+  TYPE,
+  TYPE2
+}
