@@ -11,7 +11,6 @@ public final class RubyLexer {
 
   /** Initial size of the lookahead buffer. */
   private static final int ZZ_BUFFERSIZE = 16384;
-  private static final String ZZ_NL = System.getProperty("line.separator");
 
   // Lexical states.
   public static final int YYINITIAL = 0;
@@ -508,23 +507,6 @@ public final class RubyLexer {
   }
 
 
-  private static String zzToPrintable(String str) {
-    StringBuilder builder = new StringBuilder();
-    for (int n = 0 ; n < str.length() ; ) {
-      int ch = str.codePointAt(n);
-      int charCount = Character.charCount(ch);
-      n += charCount;
-      if (ch > 31 && ch < 127) {
-        builder.append((char)ch);
-      } else if (charCount == 1) {
-        builder.append(String.format("\\u%04X", ch));
-      } else {
-        builder.append(String.format("\\U%06X", ch));
-      }
-    }
-    return builder.toString();
-  }
-
   /** Returns the maximum size of the scanner buffer, which limits the size of tokens. */
   private int zzMaxBufferLen() {
     return Integer.MAX_VALUE;
@@ -867,80 +849,58 @@ public final class RubyLexer {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
               {
-                System.out.println("char: "+yychar+" "+"match: <<EOF>>");
-                System.out.println("action [214] { return new Token(TokenType.EOF); }");
                 return new Token(TokenType.EOF);
               }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [213] { throw new Error(\"Illegal character <\" + yytext() + \"<\"); }");
             { throw new Error("Illegal character <" + yytext() + "<");
             }
           // fall through
           case 15: break;
           case 2:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [188] {  }");
             { 
             }
           // fall through
           case 16: break;
           case 3:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [163] { yybegin(STRING);"+ZZ_NL+"                                    string.setLength(0); }");
             { yybegin(STRING);
                                     string.setLength(0);
             }
           // fall through
           case 17: break;
           case 4:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [185] { return new Token(TokenType.COMMENT, yytext()); }");
             { return new Token(TokenType.COMMENT, yytext());
             }
           // fall through
           case 18: break;
           case 5:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [159] { return new Token(TokenType.OPERATOR, yytext()); }");
             { return new Token(TokenType.OPERATOR, yytext());
             }
           // fall through
           case 19: break;
           case 6:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [114] { return new Token(TokenType.OPERATOR,  yytext()); }");
             { return new Token(TokenType.OPERATOR,  yytext());
             }
           // fall through
           case 20: break;
           case 7:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [182] { return new Token(TokenType.NUMBER, yytext()); }");
             { return new Token(TokenType.NUMBER, yytext());
             }
           // fall through
           case 21: break;
           case 8:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [193] { return new Token(TokenType.IDENTIFIER, yytext()); }");
             { return new Token(TokenType.IDENTIFIER, yytext());
             }
           // fall through
           case 22: break;
           case 9:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [203] { string.append(yytext()); }");
             { string.append(yytext());
             }
           // fall through
           case 23: break;
           case 10:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [197] { yybegin(YYINITIAL); "+ZZ_NL+"                                     // length also includes the trailing quote"+ZZ_NL+"                                     return new Token(TokenType.STRING, string.toString()); }");
             { yybegin(YYINITIAL); 
                                      // length also includes the trailing quote
                                      return new Token(TokenType.STRING, string.toString());
@@ -948,111 +908,27 @@ public final class RubyLexer {
           // fall through
           case 24: break;
           case 11:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [191] { return new Token(TokenType.GLOBALIDENTIFIER, yytext()); }");
             { return new Token(TokenType.GLOBALIDENTIFIER, yytext());
             }
           // fall through
           case 25: break;
           case 12:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [192] { return new Token(TokenType.TYPE2, yytext()); }");
             { return new Token(TokenType.TYPE2, yytext());
             }
           // fall through
           case 26: break;
           case 13:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [97] { return new Token(TokenType.KEYWORD, yytext()); }");
             { return new Token(TokenType.KEYWORD, yytext());
             }
           // fall through
           case 27: break;
           case 14:
-            System.out.println("char: "+yychar+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [108] { return new Token(TokenType.TYPE, yytext()); }");
             { return new Token(TokenType.TYPE, yytext());
             }
           // fall through
           case 28: break;
           default:
             zzScanError(ZZ_NO_MATCH);
-        }
-      }
-    }
-  }
-
-  /**
-   * Runs the scanner on input files.
-   *
-   * This main method is the debugging routine for the scanner.
-   * It prints debugging information about each returned token to
-   * System.out until the end of file is reached, or an error occured.
-   *
-   * @param argv   the command line, contains the filenames to run
-   *               the scanner on.
-   */
-  public static void main(String[] argv) {
-    if (argv.length == 0) {
-      System.out.println("Usage : java RubyLexer [ --encoding <name> ] <inputfile(s)>");
-    }
-    else {
-      int firstFilePos = 0;
-      String encodingName = "UTF-8";
-      if (argv[0].equals("--encoding")) {
-        firstFilePos = 2;
-        encodingName = argv[1];
-        try {
-          // Side-effect: is encodingName valid?
-          java.nio.charset.Charset.forName(encodingName);
-        } catch (Exception e) {
-          System.out.println("Invalid encoding '" + encodingName + "'");
-          return;
-        }
-      }
-      for (int i = firstFilePos; i < argv.length; i++) {
-        RubyLexer scanner = null;
-        java.io.FileInputStream stream = null;
-        java.io.Reader reader = null;
-        try {
-          stream = new java.io.FileInputStream(argv[i]);
-          reader = new java.io.InputStreamReader(stream, encodingName);
-          scanner = new RubyLexer(reader);
-          do {
-            System.out.println(scanner.yylex());
-          } while (!scanner.zzAtEOF);
-
-        }
-        catch (java.io.FileNotFoundException e) {
-          System.out.println("File not found : \""+argv[i]+"\"");
-        }
-        catch (java.io.IOException e) {
-          System.out.println("IO error scanning file \""+argv[i]+"\"");
-          System.out.println(e);
-        }
-        catch (Exception e) {
-          System.out.println("Unexpected exception:");
-          e.printStackTrace();
-        }
-        finally {
-          if (reader != null) {
-            try {
-              reader.close();
-            }
-            catch (java.io.IOException e) {
-              System.out.println("IO error closing file \""+argv[i]+"\"");
-              System.out.println(e);
-            }
-          }
-          if (stream != null) {
-            try {
-              stream.close();
-            }
-            catch (java.io.IOException e) {
-              System.out.println("IO error closing file \""+argv[i]+"\"");
-              System.out.println(e);
-            }
-          }
         }
       }
     }
